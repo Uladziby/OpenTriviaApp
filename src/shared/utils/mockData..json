@@ -1,0 +1,97 @@
+{
+	"response_code": 0,
+	"results": [
+		{
+			"type": "multiple",
+			"difficulty": "easy",
+			"category": "Entertainment: Cartoon &amp; Animations",
+			"question": "What is the name of the city that The Flintstones is based in?",
+			"correct_answer": "Bedrock",
+			"incorrect_answers": ["Stoneville", "Rockhampton", "Boulder City"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Entertainment: Music",
+			"question": "Korean girl group TWICE is under which Entertainment Label?",
+			"correct_answer": "JYP",
+			"incorrect_answers": ["MBK", "YG", "Stone Music"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "General Knowledge",
+			"question": "What is the average life span of a garden ant?",
+			"correct_answer": "15 years",
+			"incorrect_answers": ["24 hours", "1 week", "3 years"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Geography",
+			"question": "What is the capital of the State of Washington, United States?",
+			"correct_answer": "Olympia",
+			"incorrect_answers": ["Washington D.C.", "Seattle", "Yukon"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "History",
+			"question": "Which Nazi General was known as the &quot;Desert Fox&quot;?",
+			"correct_answer": "Erwin Rommel",
+			"incorrect_answers": [
+				"Gerd von Rundstadt",
+				"Wilhelm Keitel",
+				"Heinz Guderian "
+			]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Entertainment: Video Games",
+			"question": "In &quot;PAYDAY 2&quot;, what weapon has the highest base weapon damage on a per-shot basis?",
+			"correct_answer": "HRL-7",
+			"incorrect_answers": [
+				"Heavy Crossbow",
+				"Thanatos .50 cal",
+				"Broomstick Pistol"
+			]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Celebrities",
+			"question": "What is generally considered to be William Shakespeare&#039;s birth date?",
+			"correct_answer": "April 23rd, 1564",
+			"incorrect_answers": [
+				"July 4th, 1409",
+				"September 29th, 1699",
+				"December 1st, 1750"
+			]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Entertainment: Video Games",
+			"question": "In Call Of Duty: Black Ops II, who is the main antagonist?",
+			"correct_answer": "Raul Men&eacute;ndez ",
+			"incorrect_answers": ["Vladimir Makarov ", "Frank Woods", "DeFalco"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "medium",
+			"category": "Entertainment: Video Games",
+			"question": "Where does &quot;The Legend of Zelda: Majora&#039;s Mask&quot; take place?",
+			"correct_answer": "Termina",
+			"incorrect_answers": ["Hyrule", "Gysahl", "Besaid"]
+		},
+		{
+			"type": "multiple",
+			"difficulty": "easy",
+			"category": "Vehicles",
+			"question": "Which Italian city is home of the car manufacturer &#039;Fiat&#039;?",
+			"correct_answer": "Turin",
+			"incorrect_answers": ["Maranello", "Modena", "Rome"]
+		}
+	]
+}
