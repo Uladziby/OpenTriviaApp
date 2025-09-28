@@ -6,7 +6,7 @@ export const StatisticsChart = ({ chartData }: { chartData: ChartData[] }) => {
 			{chartData.map(item => (
 				<div
 					key={item.difficulty}
-					className=' bg-secondary-light p-4 rounded-lg border-white border-2'
+					className=' bg-secondary-light p-4 rounded-lg'
 				>
 					<h3 className='font-semibold text-lg text-primary'>
 						{item.difficulty}

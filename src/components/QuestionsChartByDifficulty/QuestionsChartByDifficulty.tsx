@@ -18,9 +18,11 @@ import type { ChartData } from './types'
 import { StatisticsChart } from './StatisticsChart'
 
 export const QuestionsChartByDifficulty = ({
-	items
+	items,
+	selectedCategory
 }: {
 	items: QuestionsType[]
+	selectedCategory: string
 }) => {
 	const numberOfQuestions = countQuestionsByDifficulty(items)
 
@@ -35,7 +37,8 @@ export const QuestionsChartByDifficulty = ({
 	return (
 		<WrapperSection
 			title={TITLE_CHART_BY_DIFFICULTY}
-			classes='flex flex-row gap-2'
+			classes='flex flex-col gap-2'
+			childrenClasses='flex flex-row gap-2'
 		>
 			<ResponsiveContainer width='100%' height={400}>
 				<BarChart
@@ -66,12 +69,12 @@ export const QuestionsChartByDifficulty = ({
 					<Legend />
 					<Bar
 						dataKey='count'
-						name='Difficulty'
+						name={selectedCategory ? `${selectedCategory}` : 'All Categories'}
 						fill='#7448ff'
 						radius={[4, 4, 0, 0]}
 					>
-						{items.map((entry, index) => (
-							<Cell key={`cell-${index}`} style={{ cursor: 'pointer' }} />
+						{items.map((__, index) => (
+							<Cell key={`cell-${index}`} />
 						))}
 					</Bar>
 					<Tooltip

@@ -4,14 +4,27 @@ import { WrapperSection } from '../../shared/components/WrapperSection/WrapperSe
 import { CATEGORIES } from '../../shared/utils/constants'
 import { getUniqueTitles } from '../../shared/utils/getUniqueTitles'
 
-export const CategoryList = ({ items }: { items: QuestionsType[] }) => {
+export const CategoryList = ({
+	items,
+	onCategorySelect,
+	selectedCategory
+}: {
+	items: QuestionsType[]
+	onCategorySelect: (category: string) => void
+	selectedCategory: string
+}) => {
 	const titles = getUniqueTitles(items)
 
 	return (
-		<WrapperSection title={CATEGORIES}>
-			<ul className='grid w-full gap-5 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-2'>
+		<WrapperSection title={CATEGORIES} classes='row-span-2'>
+			<ul className='w-full gap-5 flex flex-col '>
 				{titles.map(title => (
-					<CategoryListItem key={title} categoryTitle={title} />
+					<CategoryListItem
+						key={title}
+						categoryTitle={title}
+						onCategorySelect={onCategorySelect}
+						isSelected={selectedCategory === title}
+					/>
 				))}
 			</ul>
 		</WrapperSection>
