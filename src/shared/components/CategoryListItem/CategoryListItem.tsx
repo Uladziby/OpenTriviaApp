@@ -9,7 +9,7 @@ export const CategoryListItem = ({
 }) => {
 	return (
 		<li
-			className={`cursor-pointer list-none rounded-lg hover:bg-primary  ${isSelected ? 'bg-primary' : 'bg-secondary-light'}`}
+			className={` px-1 cursor-pointer list-none rounded-lg hover:bg-primary  ${isSelected ? 'bg-primary' : 'bg-secondary-light'}`}
 		>
 			<button
 				className='cursor-pointer grid h-12 w-full place-items-center text-white text-sm hover:shadow-md text-p'

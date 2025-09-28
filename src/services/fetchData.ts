@@ -10,6 +10,5 @@ export const fetchData = async (
 		throw new Error('Network response was not ok')
 	}
 	const data: ResponseOpenTrivia = await response.json()
-	console.log(data.results, 'data from fetch')
 	return data.results
 }

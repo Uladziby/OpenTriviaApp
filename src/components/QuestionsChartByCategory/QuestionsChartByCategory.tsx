@@ -10,43 +10,23 @@ import { WrapperSection } from '../../shared/components/WrapperSection/WrapperSe
 import { TITLE_CHART_BY_CATEGORY } from '../../shared/utils/constants'
 import type { QuestionsType } from '../../services/types'
 import type { ChartDataByCategory } from './types'
-import { generateRandomColor } from '../../shared/utils/generateRandomColor'
 import { ChartTooltip } from '../../shared/components/ChartTooltip/ChartTooltip'
+import { useState } from 'react'
+import { sortChartDataByCategory } from '../../shared/utils/sortChartDataByCategory'
+import { getArrayOfColors } from '../../shared/utils/getArrayOfColors'
 
 export const QuestionsChartByCategory = ({
 	items
 }: {
 	items: QuestionsType[]
 }) => {
-	const categoryCount: Record<string, number> = items.reduce(
-		(acc, question) => {
-			const category = question.category
-			acc[category] = (acc[category] || 0) + 1
-			return acc
-		},
-		{} as Record<string, number>
-	)
-
-	const chartData: ChartDataByCategory[] = Object.entries(categoryCount)
-		.map(([category, count]) => ({
-			category:
-				category.length > 20 ? category.substring(0, 20) + '...' : category,
-			fullCategory: category,
-			count: count,
-			percentage: ((count / items.length) * 100).toFixed(1)
-		}))
-		.sort((a, b) => b.count - a.count)
-
-	const colors: string[] = chartData.map((_, index) => {
-		if (chartData.length === 1) {
-			return '#7448ff'
-		}
-		return generateRandomColor(index, chartData.length)
-	})
+	const [hoveredPieSlice, setHoveredPieSlice] = useState<number | null>(null)
+	const chartData: ChartDataByCategory[] = sortChartDataByCategory(items)
+	const colors: string[] = getArrayOfColors(chartData)
 
 	return (
 		<WrapperSection title={TITLE_CHART_BY_CATEGORY} classes='flex-col gap-2'>
-			<ResponsiveContainer width='100%' height={400}>
+			<ResponsiveContainer width='100%' height={500}>
 				<PieChart>
 					<Pie
 						data={chartData}
@@ -57,13 +37,33 @@ export const QuestionsChartByCategory = ({
 							const percentNum = Number(percentage)
 							return `${category} ${percentNum.toFixed(0)}%`
 						}}
-						outerRadius={120}
+						outerRadius={hoveredPieSlice !== null ? 120 : 110}
 						fill='#8884d8'
 						dataKey='count'
+						isAnimationActive={false}
+						onMouseEnter={(__, index) => setHoveredPieSlice(index)}
+						onMouseLeave={() => setHoveredPieSlice(null)}
 					>
-						{chartData.map((__, index) => (
-							<Cell key={`cell-${index}`} fill={colors[index]} />
-						))}
+						{chartData.map((__, index) => {
+							const isHovered = hoveredPieSlice === index
+							return (
+								<Cell
+									key={`cell-${index}`}
+									fill={colors[index]}
+									stroke='#fff'
+									strokeWidth={isHovered ? 3 : 2}
+									style={{
+										filter: isHovered
+											? 'drop-shadow(0 8px 16px rgba(0,0,0,0.2)) brightness(1.1)'
+											: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+										cursor: 'pointer',
+										transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+										transformOrigin: 'center',
+										transition: 'all 0.2s ease-in-out'
+									}}
+								/>
+							)
+						})}
 					</Pie>
 					<Tooltip
 						content={props => (
@@ -79,19 +79,16 @@ export const QuestionsChartByCategory = ({
 						)}
 					/>
 					<Legend
-						formatter={(value: string, entry: unknown) =>
+						formatter={(__, entry: unknown) =>
 							(entry as { payload: ChartDataByCategory }).payload.fullCategory
 						}
 						iconType='circle'
 						layout='horizontal'
 						align='center'
-						wrapperStyle={{ fontSize: 12 }}
+						wrapperStyle={{ fontSize: 12, marginTop: '80px' }}
 					/>
 				</PieChart>
 			</ResponsiveContainer>
 		</WrapperSection>
 	)
 }
-
-//add hover effect to pie slices
-// add responsive legend
