@@ -5,20 +5,20 @@ export const ChartTooltip = ({
 	payload,
 	label
 }: IChartTooltipProps) => {
-	if (active && payload) {
+	if (active && payload && payload.length) {
 		const { count: currentValue, percentage } = payload[0].payload
 
 		return (
-			<div className='h-16 bg-white px-2 py-1'>
-				<h3 className='text-xl font-bold text-center'>{label}</h3>
-				<div className='flex gap-3 mb-1'>
-					<h3 className='text-xl font-bold text-center'>
-						count : {currentValue}
-					</h3>
-				</div>
-				<h3 className='text-xl font-bold text-center'>
-					percentage : {percentage}
-				</h3>
+			<div className='p-4 bg-slate-900 flex flex-col gap-4 rounded-md'>
+				<p className='text-medium text-lg text-white'>{label}</p>
+				<p className='text-sm text-blue-400'>
+					Amount:
+					<span className='ml-2'>{currentValue}</span>
+				</p>
+				<p className='text-sm text-indigo-400'>
+					Prcentage:
+					<span className='ml-2'>{percentage}%</span>
+				</p>
 			</div>
 		)
 	}

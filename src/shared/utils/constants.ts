@@ -16,6 +16,7 @@ export const Colors = {
 export const CATEGORIES = ' Categories'
 export const TITLE_CHART_BY_DIFFICULTY =
 	'Distribution of Questions by Difficulty'
+export const TITLE_CHART_BY_CATEGORY = 'Distribution of Questions by Category'
 
 export const mockData = [
 	{ difficulty: 'Hard', count: 5, percentage: '50.0' },
