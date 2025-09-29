@@ -11,7 +11,7 @@ import { TITLE_CHART_BY_CATEGORY } from '../../shared/utils/constants'
 import type { QuestionsType } from '../../services/types'
 import type { ChartDataByCategory } from './types'
 import { ChartTooltip } from '../../shared/components/ChartTooltip/ChartTooltip'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { sortChartDataByCategory } from '../../shared/utils/sortChartDataByCategory'
 import { getArrayOfColors } from '../../shared/utils/getArrayOfColors'
 
@@ -21,28 +21,45 @@ export const QuestionsChartByCategory = ({
 	items: QuestionsType[]
 }) => {
 	const [hoveredPieSlice, setHoveredPieSlice] = useState<number | null>(null)
+	const [isMobile, setIsMobile] = useState(false)
+
 	const chartData: ChartDataByCategory[] = sortChartDataByCategory(items)
 	const colors: string[] = getArrayOfColors(chartData)
 
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 768)
+		checkMobile()
+		window.addEventListener('resize', checkMobile)
+		return () => window.removeEventListener('resize', checkMobile)
+	}, [])
+
 	return (
-		<WrapperSection title={TITLE_CHART_BY_CATEGORY} classes='flex-col gap-2'>
-			<ResponsiveContainer width='100%' height={500}>
-				<PieChart>
+		<WrapperSection
+			title={TITLE_CHART_BY_CATEGORY}
+			wrapperClassname='flex-col gap-2'
+		>
+			<ResponsiveContainer width='100%' height={isMobile ? 400 : 500}>
+				<PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
 					<Pie
 						data={chartData}
 						cx='50%'
 						cy='50%'
 						labelLine={false}
-						label={({ category, percentage }) => {
-							const percentNum = Number(percentage)
-							return `${category} ${percentNum.toFixed(0)}%`
-						}}
-						outerRadius={hoveredPieSlice !== null ? 120 : 110}
+						label={
+							isMobile
+								? false
+								: ({ category, percentage }) => {
+										const percentNum = Number(percentage)
+										return `${category} ${percentNum.toFixed(0)}%`
+									}
+						}
+						outerRadius={hoveredPieSlice !== null ? 110 : 100}
 						fill='#8884d8'
 						dataKey='count'
 						isAnimationActive={false}
 						onMouseEnter={(__, index) => setHoveredPieSlice(index)}
 						onMouseLeave={() => setHoveredPieSlice(null)}
+						style={{ fontSize: 12 }}
 					>
 						{chartData.map((__, index) => {
 							const isHovered = hoveredPieSlice === index
@@ -57,9 +74,8 @@ export const QuestionsChartByCategory = ({
 											? 'drop-shadow(0 8px 16px rgba(0,0,0,0.2)) brightness(1.1)'
 											: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
 										cursor: 'pointer',
-										transform: isHovered ? 'scale(1.02)' : 'scale(1)',
-										transformOrigin: 'center',
-										transition: 'all 0.2s ease-in-out'
+										opacity: isHovered ? 0.8 : 1,
+										transition: 'all 0.2s ease'
 									}}
 								/>
 							)
@@ -85,7 +101,7 @@ export const QuestionsChartByCategory = ({
 						iconType='circle'
 						layout='horizontal'
 						align='center'
-						wrapperStyle={{ fontSize: 12, marginTop: '80px' }}
+						wrapperStyle={{ fontSize: isMobile ? 11 : 12 }}
 					/>
 				</PieChart>
 			</ResponsiveContainer>

@@ -16,7 +16,7 @@ export const CategoryList = ({
 	const titles = getUniqueTitles(items)
 
 	return (
-		<WrapperSection title={CATEGORIES} classes='row-span-2'>
+		<WrapperSection title={CATEGORIES} wrapperClassname='row-span-2'>
 			<ul className='w-full gap-5 flex flex-col'>
 				{titles.map(title => (
 					<CategoryListItem

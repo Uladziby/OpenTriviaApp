@@ -2,11 +2,11 @@ import type { ChartData } from './types'
 
 export const StatisticsChart = ({ chartData }: { chartData: ChartData[] }) => {
 	return (
-		<div className='flex flex-col gap-2 w-lg'>
+		<div className='flex flex-col gap-2 basis-[35%]'>
 			{chartData.map(item => (
 				<div
 					key={item.difficulty}
-					className=' bg-secondary-light p-4 rounded-lg'
+					className=' bg-secondary-light p-4 rounded-lg '
 				>
 					<h3 className='font-semibold text-lg text-primary'>
 						{item.difficulty}

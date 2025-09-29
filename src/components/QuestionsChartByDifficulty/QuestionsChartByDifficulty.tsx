@@ -37,41 +37,58 @@ export const QuestionsChartByDifficulty = ({
 	return (
 		<WrapperSection
 			title={TITLE_CHART_BY_DIFFICULTY}
-			classes='flex flex-col gap-2'
-			childrenClasses='flex flex-row gap-2'
+			wrapperClassname='flex flex-col gap-3 md:gap-4 lg:gap-5'
+			childrenClassname='flex flex-col md:flex-row gap-3 md:gap-4 lg:gap-5'
 		>
-			<ResponsiveContainer width='100%' height={400}>
+			<ResponsiveContainer
+				width='100%'
+				height={400}
+				className='flex sm:h-[350px] md:h-[400px] lg:h-[450px]'
+			>
 				<BarChart
 					data={chartData}
 					margin={{
 						top: 20,
-						right: 30,
-						left: 20,
+						right: 10,
+						left: 0,
 						bottom: 5
 					}}
+					className='sm:mr-5 md:mr-7 lg:mr-8'
 				>
-					<CartesianGrid strokeDasharray='3 3' stroke='#f0f0f0' />
+					<CartesianGrid
+						strokeDasharray='3 3'
+						stroke='#f0f0f0'
+						className='opacity-50 md:opacity-75'
+					/>
 					<XAxis
 						dataKey='difficulty'
-						tick={{ fontSize: 12 }}
+						tick={{ fontSize: 10 }}
+						className='text-xs sm:text-sm'
 						axisLine={{ stroke: '#d1d5db' }}
 					/>
 					<YAxis
 						dataKey={'count'}
-						tick={{ fontSize: 12 }}
+						tick={{ fontSize: 10 }}
+						className='text-xs sm:text-sm'
 						axisLine={{ stroke: '#d1d5db' }}
 						label={{
 							value: 'Number of Questions',
 							angle: -90,
-							position: 'insideLeft'
+							position: 'insideLeft',
+							style: { fontSize: 11 }
 						}}
 					/>
-					<Legend />
+					<Legend
+						wrapperStyle={{ fontSize: '12px' }}
+						className='text-xs sm:text-sm'
+					/>
 					<Bar
 						dataKey='count'
 						name={selectedCategory ? `${selectedCategory}` : 'All Categories'}
 						fill='#7448ff'
 						radius={[4, 4, 0, 0]}
+						maxBarSize={60}
+						className='sm:max-w-[70px] md:max-w-[80px]'
 					>
 						{items.map((__, index) => (
 							<Cell key={`cell-${index}`} />
